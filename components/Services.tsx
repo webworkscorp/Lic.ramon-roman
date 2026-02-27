@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShieldCheck, FileSpreadsheet, Scale, Building, Receipt, Wallet, BadgeCheck, PenTool, Briefcase, ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Service } from '../types.ts';
 
 const servicesData: Service[] = [
@@ -59,25 +60,59 @@ const servicesData: Service[] = [
   }
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5
+    }
+  }
+};
+
 export const Services: React.FC = () => {
   return (
     <section id="services" className="py-24 bg-white relative">
       <div className="container mx-auto px-6 lg:px-24">
         
-        <div className="mb-16 border-b border-corp-100 pb-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-16 border-b border-corp-100 pb-6"
+        >
             <h2 className="text-3xl lg:text-4xl font-sans font-bold text-corp-900 mb-2">
               Servicios Profesionales
             </h2>
             <p className="text-corp-500 font-light">
               Soluciones integrales para su empresa y patrimonio.
             </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10"
+        >
           {servicesData.map((service) => (
-            <div 
+            <motion.div 
               key={service.id} 
-              className="group flex flex-col items-start p-6 bg-corp-50/50 hover:bg-corp-50 transition-colors duration-300 rounded-sm"
+              variants={itemVariants}
+              className="group flex flex-col items-start p-6 bg-corp-50/50 hover:bg-corp-50 transition-colors duration-300 rounded-sm cursor-default"
             >
               <div className="mb-4 text-corp-800 group-hover:text-accent-gold transition-colors duration-300">
                   {React.cloneElement(service.icon as React.ReactElement, { strokeWidth: 1.5, className: "w-6 h-6" })}
@@ -94,9 +129,9 @@ export const Services: React.FC = () => {
               <div className="mt-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                  <ArrowUpRight className="w-4 h-4 text-corp-400" />
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

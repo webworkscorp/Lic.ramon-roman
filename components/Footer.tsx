@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export const Footer: React.FC = () => {
 
@@ -11,7 +12,13 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-white text-corp-900 py-16 border-t border-corp-100">
+    <motion.footer 
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1 }}
+      className="bg-white text-corp-900 py-16 border-t border-corp-100"
+    >
       <div className="container mx-auto px-6 lg:px-24">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
           
@@ -50,6 +57,6 @@ export const Footer: React.FC = () => {
           <p className="mt-2 md:mt-0">Servicios Profesionales CPA</p>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };

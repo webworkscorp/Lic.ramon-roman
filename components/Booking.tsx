@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, Mail, Phone, MapPin } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { FormData } from '../types.ts';
 
 export const Booking: React.FC = () => {
@@ -19,12 +20,24 @@ export const Booking: React.FC = () => {
 
   return (
     <section id="booking" className="py-32 bg-corp-900 text-white relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-corp-800 skew-x-12 translate-x-32 opacity-50 z-0"></div>
+      <motion.div 
+        initial={{ x: "50%", skewX: 12, opacity: 0 }}
+        whileInView={{ x: "32px", skewX: 12, opacity: 0.5 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="absolute top-0 right-0 w-1/2 h-full bg-corp-800 z-0"
+      ></motion.div>
       
       <div className="container mx-auto px-6 lg:px-24 relative z-10">
         <div className="flex flex-col lg:flex-row gap-20 items-stretch">
           
-          <div className="w-full lg:w-5/12 flex flex-col justify-center">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="w-full lg:w-5/12 flex flex-col justify-center"
+          >
             <span className="text-accent-gold font-bold tracking-[0.2em] text-xs uppercase mb-6 block">Contacto Directo</span>
             <h2 className="text-4xl lg:text-5xl font-serif mb-8 leading-tight">
               ¿En qué puedo <br />
@@ -76,9 +89,15 @@ export const Booking: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="w-full lg:w-7/12 bg-white text-corp-900 p-8 lg:p-16 shadow-2xl rounded-sm">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="w-full lg:w-7/12 bg-white text-corp-900 p-8 lg:p-16 shadow-2xl rounded-sm"
+          >
             <form onSubmit={handleSubmit} className="h-full flex flex-col justify-center">
               <h3 className="text-2xl font-serif mb-10">Enviar Consulta</h3>
               
@@ -120,7 +139,7 @@ export const Booking: React.FC = () => {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </form>
-          </div>
+          </motion.div>
 
         </div>
       </div>
